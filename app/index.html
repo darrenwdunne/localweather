@@ -25,9 +25,9 @@
     <!--[if lt IE 10]> <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p> <![endif]-->
 
     <div class="jumbotron">
-      <h1 id="demo">'Allo, 'Allo!</h1>
+      <h1 id="demo">Local Weather</h1>
 
-      <p class="lead">Always a pleasure scaffolding your apps.</p>
+      <p id="status" class="lead">Initializing.</p>
       <div id="mapholder"></div>
       <p>
         <a class="btn btn-lg btn-success" href="#">Splendid!</a>
@@ -77,6 +77,24 @@
           </div>
         </div>
       </form>
+    </div>
+
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Weather</h4>
+          </div>
+          <div class="modal-body">
+            <p>Some text in the modal.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <div class="footer">

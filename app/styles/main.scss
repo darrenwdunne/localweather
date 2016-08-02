@@ -69,6 +69,20 @@ body {
   width: 0;
 }
 
+
+#background1{
+    width: 400px;
+    height: 300px;
+    position: absolute;
+}
+
+#background2{
+    width: 400px;
+    height: 300px;
+    position: absolute;
+    z-index: -1;
+}
+
 // .fa-loading-bg, .fa-loading-icon-wrapper {
 //   position: absolute;
 //   left: 0;
