@@ -2,6 +2,8 @@
 // api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}
 // api.openweathermap.org/data/2.5/weather?q=London,uk&callback=test
 // var url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='+latitude+','+longitude+'&sensor=true';
+var latlon;
+var address;
 
 
 $(document).ready(function() {
@@ -14,31 +16,41 @@ function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(onLocSuccess, onLocError);
   } else {
-    $("#latlon").html("Geolocation not supported.");
+    $("#inputLatLon").html("Geolocation not supported.");
   }
 }
 
 function onLocSuccess(position) {
-  $("#latlon").html("Lat: " + position.coords.latitude + " Lon: " + position.coords.longitude);
+  $("#inputLatLon").val(position.coords.latitude+","+position.coords.longitude);
   $("#inputCityNameWait").hide();
-  showPositionOnMap(position);
+  latlon = position; // store it for later
+  getCity(position);
 }
 
 function onLocError(error) {
-  var message = 'Location Error: '+ error.code;
-  console.log(message);
+  showError('Error: Determining Location: ' + error.code);
+}
+
+function getCity(position) {
+  var url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='+position.coords.latitude+','+position.coords.longitude+'&sensor=true';
+  $.getJSON(url, onCitySuccess, onCityError);
+}
+
+function onCitySuccess(json) {
+  $("#inputStreet").val(json.results[0].formatted_address);
+  showPositionOnMap(latlon);
+}
+
+function onCityError(error) {
+  showError('Error Determining City: ' + error.code);
 }
 
 function showPositionOnMap(position) {
-  updateMap(position.coords.latitude,position.coords.longitude,10);
+  updateMap(position.coords.latitude, position.coords.longitude, 10);
 
-  $("#mapholder").html("<img src='" + img_url + "'>");
-  $.getJSON("http://api.openweathermap.org/data/2.5/weather?q=Raleigh,nc&APPID=c09de18a26acbeecad5e6553158ac245&callback=", function(json) {
-    showWeather(json);
-  });
 }
 
-function updateMap(lat,lon,zoom) {
+function updateMap(lat, lon, zoom) {
   if (zoom === undefined) {
     zoom = 1;
   }
@@ -48,11 +60,15 @@ function updateMap(lat,lon,zoom) {
   if (lon === undefined) {
     lon = 0;
   }
-  var url= "http://maps.googleapis.com/maps/api/staticmap?center=" + lat+","+lon + "&zoom="+zoom+"&size=400x300&sensor=false";
+  var url = "http://maps.googleapis.com/maps/api/staticmap?center=" + lat + "," + lon + "&zoom=" + zoom + "&size=400x300&sensor=false";
   $("#mapholder").html("<img src='" + url + "'>");
 }
 
-
+function getWeather(position) {
+  $.getJSON("http://api.openweathermap.org/data/2.5/weather?q=Raleigh,nc&APPID=c09de18a26acbeecad5e6553158ac245&callback=", function(json) {
+    showWeather(json);
+  });
+}
 
 function showWeather(json) {
   console.log(json.weather[0]);
@@ -61,7 +77,8 @@ function showWeather(json) {
 }
 
 function showError(msg) {
-  $('#error').html('Сталася помилка: ' + msg);
+  $('#error').html(msg);
+  console.log(msg);
 }
 
 
