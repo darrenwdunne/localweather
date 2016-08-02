@@ -85,15 +85,14 @@ function showWeather(json) {
 //  $('#myModal').modal('show');
   var contentHtml = buildWeatherHTML(json);
   var city=json.name;
-  $("#mapholder").popover({
+  $("#status").popover({
     placement: 'bottom', //placement of the popover. also can use top, bottom, left or right
     title: '<div style="text-align:center; color:blue; font-size:14px;">Weather for '+city+'</div>', //this is the top title bar of the popover. add some basic css
     html: 'true',
     viewport: { "selector": "#mapholder", "padding": 0 },
-//    content: '<div id="popOverBox"><img src="http://www.hd-report.com/wp-content/uploads/2008/08/mr-evil.jpg" width="251" height="201" /></div>'
     content: '<div id="popOverBox">'+contentHtml+'</div>'
   });
-  $('#mapholder').popover('show');
+  $('#status').popover('show');
 //  debugger;
 }
 
