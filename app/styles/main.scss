@@ -13,9 +13,9 @@ $icon-font-path: '../fonts/';
 
 /* Space out content a bit */
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
-
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background-color: lightblue;
 }
 
 h1,
@@ -65,9 +65,10 @@ h6 {
 .jumbotron {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
-  background-image: url(https://pixabay.com/static/uploads/photo/2013/02/10/16/01/sky-80232_960_720.jpg);
+  background-image: url(https://pixabay.com/static/uploads/photo/2016/07/18/16/17/cumulus-clouds-1526262_960_720.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+  padding-top: 12px;
   .btn {
     font-size: 21px;
     padding: 14px 24px;
@@ -149,5 +150,6 @@ h6 {
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;
+    padding-top: 12px;
   }
 }
