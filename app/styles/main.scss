@@ -18,6 +18,17 @@ body {
 
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  // text-align: center;
+  // font-family: $font-family_2;
+  text-shadow: 2px 2px 2px white;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .footer,
 .header,
@@ -54,6 +65,9 @@ body {
 .jumbotron {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
+  background-image: url(https://pixabay.com/static/uploads/photo/2013/02/10/16/01/sky-80232_960_720.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
   .btn {
     font-size: 21px;
     padding: 14px 24px;

@@ -47,6 +47,9 @@ function onCitySuccess(json) {
 
 function onCityError(error) {
   showError('Error Determining City: ' + error.code);
+  // maybe google apis doesn't work on mobile? try to get weather anyway
+  showPositionOnMap(latlon);
+  getWeather(latlon);
 }
 
 function showPositionOnMap(position) {
@@ -85,14 +88,23 @@ function showWeather(json) {
 //  $('#myModal').modal('show');
   var contentHtml = buildWeatherHTML(json);
   var city=json.name;
-  $("#status").popover({
+  $('#status').popover({
     placement: 'bottom', //placement of the popover. also can use top, bottom, left or right
     title: '<div style="text-align:center; color:blue; font-size:14px;">Weather for '+city+'</div>', //this is the top title bar of the popover. add some basic css
     html: 'true',
-    viewport: { "selector": "#mapholder", "padding": 0 },
+    viewport: { 'selector': '#mapholder', 'padding': 0 },
     content: '<div id="popOverBox">'+contentHtml+'</div>'
   });
   $('#status').popover('show');
+
+  if (json.weather[0].description.indexOf("rain")>0) {
+    $('.jumbotron').css("background-image","url(https://pixabay.com/static/uploads/photo/2014/09/21/14/39/rain-455124_960_720.jpg)");
+  } else if (json.weather[0].description.indexOf("cloud")>0) {
+    $('.jumbotron').css("background-image","url(https://pixabay.com/static/uploads/photo/2013/10/16/10/17/blue-sky-196230_960_720.jpg)");
+  } else {
+    $('.jumbotron').css("background-image","url(https://pixabay.com/static/uploads/photo/2012/05/19/00/55/sun-49143_960_720.jpg)");
+  }
+  showStatus("");
 //  debugger;
 }
 
