@@ -105,11 +105,11 @@ function showWeather(json) {
   $('#status').popover('show');
 
   if (json.weather[0].description.indexOf('rain')>0) {
-    $('.jumbotron').css('background-image','url(https://pixabay.com/static/uploads/photo/2014/09/21/14/39/rain-455124_960_720.jpg)');
+    $('.jumbotron').css('background-image','url("images/rain.jpg")');
   } else if (json.weather[0].description.indexOf('cloud')>0) {
-    $('.jumbotron').css('background-image','url(https://pixabay.com/static/uploads/photo/2013/10/16/10/17/blue-sky-196230_960_720.jpg)');
+    $('.jumbotron').css('background-image','url("images/cloud.jpg")');
   } else {
-    $('.jumbotron').css('background-image','url(https://pixabay.com/static/uploads/photo/2012/05/19/00/55/sun-49143_960_720.jpg)');
+    $('.jumbotron').css('background-image','url("images/sun.jpg")');
   }
   showStatus('');
 }
